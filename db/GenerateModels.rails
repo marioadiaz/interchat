@@ -1,0 +1,73 @@
+rails new interchat -d postgresql
+cd interchat
+
+*-turno para el clinco - 22 14hs 1454669
+
+git config --global --add safe.directory /mnt/DATA-00/MDIAZ/11-PROYECTOS/interchat
+git remote add origin https://github.com/marioadiaz/interchat.git
+
+git add .
+git commit -m "inicio proyectos"
+git push -u origin master
+
+yarn add @fortawesome/fontawesome-free
+
+Configuracion de bootstrap
+
+1.-Archvo gemfile agregar
+	# bootstrap 5
+	gem "bootstrap"
+	# Use Sass to process CSS
+	gem "sassc-rails"
+
+2.-Archivo application.css cambiar por extension .scss y agregar @import "bootstrap";
+
+3.-configurar bootstrap a traves de importmap: bin/importmap pin bootstrap --download
+4.-cambiar en importmap.rb lo siguiente:
+	pin "bootstrap" # @5.2.1
+	pin "@popperjs/core", to: "@popperjs--core.js" # @2.11.6
+por
+	pin "bootstrap", to: "bootstrap.min.js", preload:true
+	pin "popper", to: "popper.js", preload:true
+5.-agregar en assets.rb lo siguiente:
+	Rails.application.config.assets.precompile += %w(bootstrap.min.js.popper.js)
+
+6.- agregar actioncable en Gemfile
+	gem 'actioncable', '~> 7.0'
+	gem install actioncable -v 7.0.0
+
+7.- Agregar en application.js
+	import "popper"
+	import "bootstrap"
+
+8.- agregar en manifest.js
+
+	//= link bootstrap.min.js
+	//= link popper.js
+
+9.- Crear base de datos y demas
+
+rails db:create
+
+ALTA DE Rooms
+    rails g scaffold Room name:string
+
+ALTA DE users
+    rails g scaffold User username:string
+
+ALTA DE Mesagges
+    rails g scaffold Message user:references room:references content:string 
+
+CREACION Y MIGRACION DEL MODELO DE DATOS A LA BD
+  
+  
+  rails db:migrate
+
+  rails g channel room
+  rails g channel activity
+
+
+
+a5LWwskfxSqzBcA
+sistemas en git
+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
